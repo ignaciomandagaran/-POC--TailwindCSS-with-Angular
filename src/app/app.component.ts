@@ -9,8 +9,7 @@ import { Item } from './item';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  isDarkMode: boolean | undefined;
-  isDarkModeSubscription = new Subscription();
+  isDarkMode = false;
 
   title = 'todo';
   filter: 'all' | 'active' | 'done' = 'all';
@@ -26,11 +25,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.themeService.themeValue.subscribe(value => {
-      if(value === ThemeMode.DARK) {
-        this.isDarkMode = true;
-      } else {
-        this.isDarkMode = false;
-      }
+      this.isDarkMode = value;
     })
   }
 

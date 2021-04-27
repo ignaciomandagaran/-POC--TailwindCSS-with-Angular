@@ -1,7 +1,7 @@
 import { DOCUMENT } from "@angular/common";
 import { Injectable, Renderer2, Inject, RendererFactory2 } from "@angular/core";
 import { MediaMatcher } from '@angular/cdk/layout';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export enum ThemeMode {
   DARK = "dark",
@@ -12,10 +12,10 @@ export enum ThemeMode {
   providedIn: 'root'
 })
 export class ThemeService {
-  public themeQuery: MediaQueryList | undefined;
-  public isDarkMode: boolean | undefined;
-  public themeValue = new BehaviorSubject(this.localTheme);
+  private isDarkMode = false;
   private renderer: Renderer2;
+  private themeQuery: MediaQueryList | undefined;
+  public themeValue = new BehaviorSubject<boolean>(this.isDarkMode);
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -23,20 +23,28 @@ export class ThemeService {
     private media: MediaMatcher)
   {
     this.renderer = rendererFactory.createRenderer(null, null);
-
     this.themeQuery = this.media.matchMedia('(prefers-color-scheme: dark)');
 
-    if (this.localTheme === ThemeMode.DARK || this.themeQuery.matches) {
-      this.localTheme = ThemeMode.DARK;
+    if (this.themeQuery.matches && this.localTheme === null) {
       this.isDarkMode = true;
+      this.setThemeValue(this.isDarkMode);
       this.renderer.addClass(this.document.body, ThemeMode.DARK);
-    } else {
-      this.renderer.removeClass(this.document.body, ThemeMode.DEFAULT);
+    } else if (this.localTheme !== null) {
+      if (this.localTheme === ThemeMode.DARK) {
+        this.isDarkMode = true;
+        this.setThemeValue(this.isDarkMode);
+        this.renderer.addClass(this.document.body, ThemeMode.DARK);
+      } else {
+        this.isDarkMode = false;
+        this.setThemeValue(this.isDarkMode);
+        this.renderer.removeClass(this.document.body, ThemeMode.DARK);
+      }
     }
   }
 
   public toggleDarkMode() {
     this.isDarkMode = !this.isDarkMode;
+    this.setThemeValue(this.isDarkMode);
 
     if (this.isDarkMode) {
       this.localTheme = ThemeMode.DARK;
@@ -47,8 +55,15 @@ export class ThemeService {
     }
   }
 
+  public getThemeValue(): Observable<boolean> {
+    return this.themeValue.asObservable();
+  }
+
+  public setThemeValue(newValue: boolean): void {
+    this.themeValue.next(newValue);
+}
+
   set localTheme(value: string) {
-    this.themeValue.next(value); // this will make sure to tell every subscriber about the change.
     localStorage.setItem('theme', value);
   }
 
