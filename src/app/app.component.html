@@ -1,20 +1,39 @@
-<div class="main">
-  <h1>My To Do List</h1>
-  <h2>What would you like to do today?</h2>
+<div [ngClass]="{'dark': isDarkMode}">
+  <main class="main">
+    <div class="wrapper">
+      <section class="todo__container">
+        <header class="flex justify-between items-start mb-8">
+          <h1 class="text-5xl text-white tracking-widest">TODO</h1>
+          <button type="button" class="focus:outline-none" (click)="toggleTheme()">
+            <svg-icon *ngIf="!isDarkMode" class="theme-icon" src="assets/svg/icon-moon.svg"></svg-icon>
+            <svg-icon *ngIf="isDarkMode" class="theme-icon" src="assets/svg/icon-sun.svg"></svg-icon>
+          </button>
+        </header>
 
-  <label for="addItemInput">What would you like to do today?</label>
+        <div class="item__container">
+          <input type="checkbox" id="checkTodo" class="mr-5">
+          <label for="checkTodo" class="pointer-events-none"></label>
 
-  <input
-    #newItem
-    placeholder="add an item"
-    (keyup.enter)="addItem(newItem.value); newItem.value = ''"
-    class="lg-text-input"
-    id="addItemInput"
-  />
+          <input
+          #newItem
+          placeholder="Add an item 📍"
+          type="text"
+          (keyup.enter)="addItem(newItem.value); newItem.value = ''"
+          id="addItemInput"
+        />
+        </div>
 
-  <button class="btn-primary" (click)="addItem(newItem.value)">Add</button>
+        <button class="opacity-0 h-0" (click)="addItem(newItem.value)">Add</button>
 
-  <ul>
-    <li *ngFor="let item of items">{{item.description}}</li>
-  </ul>
+        <ul class="todo__list">
+          <li class="item__container" *ngFor="let item of items">
+            <input type="checkbox" [checked]="item.done" (change)="checkValue(item)" id="{{item.description | trim}}" class="mr-5">
+            <label for="{{item.description | trim}}"></label>
+            <span [ngClass]="{'checked': item.done}">{{item.description}}</span>
+          </li>
+        </ul>
+
+      </section>
+    </div>
+  </main>
 </div>

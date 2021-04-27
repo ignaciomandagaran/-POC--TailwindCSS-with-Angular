@@ -1,0 +1,73 @@
+.main {
+  @apply h-screen bg-light-gray relative font-sans transition-all dark:bg-dark-blue700;
+
+  &:before {
+    @apply block w-full absolute top-0 h-80 bg-cover dark:hidden;
+    content: '';
+    background-image: url(./../assets/images/bg-desktop-light.jpg);
+  }
+
+  &:after {
+    @apply hidden w-full absolute top-0 h-80 bg-cover dark:block;
+    content: '';
+    background-image: url(./../assets/images/bg-desktop-dark.jpg);
+  }
+}
+
+.wrapper {
+  @apply flex justify-center items-center;
+}
+
+.theme-icon {
+  svg {
+    animation: ngFakeTransition 420ms;
+  }
+}
+
+.todo {
+  &__container {
+    @apply mt-28 w-full max-w-lg z-10;
+  }
+  &__list {
+    @apply shadow-light dark:shadow-dark;
+
+    .item__container {
+      @apply border-b border-solid border-light-blue100 dark:border-dark-blue500;
+      border-radius: 0;
+
+      &:first-child {
+        border-radius: 4px 4px 0 0;
+      }
+      &:last-child {
+        border-bottom: none;
+        border-radius: 0 0 4px 4px;
+      }
+    }
+  }
+}
+
+.item__container {
+  @apply flex items-center bg-white px-5 py-4 rounded text-light-blue400 dark:bg-dark-blue600 dark:text-dark-blue200;
+
+  input[type='text'] {
+    @apply w-full bg-transparent text-light-blue400 dark:text-dark-blue100 mt-1;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  span {
+    @apply transition-all;
+
+    &.checked {
+      @apply line-through text-light-blue200 dark:text-dark-blue400 transition-all;
+    }
+  }
+}
+
+
+@keyframes ngFakeTransition {
+  0%   { opacity: 0; }
+  100% { opacity: 1; }
+}

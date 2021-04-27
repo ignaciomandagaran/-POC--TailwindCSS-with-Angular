@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
+import { Item } from './item';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'todo';
+  isDarkMode = false;
 
+  title = 'todo';
   filter: 'all' | 'active' | 'done' = 'all';
 
-  allItems = [
+  allItems: Item[] = [
     { description: 'eat', done: true },
     { description: 'sleep', done: false },
     { description: 'play', done: false },
@@ -30,4 +32,12 @@ export class AppComponent {
       done: false
     });
   }
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+  }
+
+  checkValue(item: Item) {
+    item.done = !item.done;
+ }
 }

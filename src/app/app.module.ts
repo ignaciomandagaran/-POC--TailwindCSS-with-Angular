@@ -5,10 +5,12 @@ import { AngularSvgIconModule } from 'angular-svg-icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { TrimPipe } from './pipes/trim.pipe';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    TrimPipe
   ],
   imports: [
     BrowserModule,

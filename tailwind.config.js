@@ -3,7 +3,7 @@ const colors = require('tailwindcss/colors')
 module.exports = {
   purge: [],
   presets: [],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class', // or 'media' or 'class'
   theme: {
     screens: {
       sm: '640px',
@@ -26,6 +26,23 @@ module.exports = {
       indigo: colors.indigo,
       purple: colors.violet,
       pink: colors.pink,
+
+      dark: {
+        blue100: ('var(--dark-blue-100)'),
+        blue200: ('var(--dark-blue-200)'),
+        blue300: ('var(--dark-blue-300)'),
+        blue400: ('var(--dark-blue-400)'),
+        blue500: ('var(--dark-blue-500)'),
+        blue600: ('var(--dark-blue-600)'),
+        blue700: ('var(--dark-blue-700)'),
+      },
+      light: {
+        gray:    ('var(--light-gray)'),
+        blue100: ('var(--light-blue-100)'),
+        blue200: ('var(--light-blue-200)'),
+        blue300: ('var(--light-blue-300)'),
+        blue400: ('var(--light-blue-400)'),
+      }
     },
     spacing: {
       px: '1px',
@@ -164,6 +181,8 @@ module.exports = {
       '2xl': '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
       inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
       none: 'none',
+      light: '0 20px 25px -5px hsla(236, 33%, 92%, 0.7), 0 10px 10px -5px hsla(236, 33%, 92%, 0.5)',
+      dark: '0 20px 25px -5px rgba(0, 0, 0, 0.7), 0 10px 10px -5px rgba(0, 0, 0, 0.5)'
     },
     contrast: {
       0: '0',
@@ -235,20 +254,7 @@ module.exports = {
     },
     fontFamily: {
       sans: [
-        'ui-sans-serif',
-        'system-ui',
-        '-apple-system',
-        'BlinkMacSystemFont',
-        '"Segoe UI"',
-        'Roboto',
-        '"Helvetica Neue"',
-        'Arial',
-        '"Noto Sans"',
-        'sans-serif',
-        '"Apple Color Emoji"',
-        '"Segoe UI Emoji"',
-        '"Segoe UI Symbol"',
-        '"Noto Color Emoji"',
+        '"Josefin Sans", sans-serif'
       ],
       serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
       mono: [
@@ -479,6 +485,7 @@ module.exports = {
       wide: '0.025em',
       wider: '0.05em',
       widest: '0.1em',
+
     },
     lineHeight: {
       none: '1',
@@ -849,14 +856,14 @@ module.exports = {
     borderStyle: ['responsive'],
     borderWidth: ['responsive'],
     boxDecorationBreak: ['responsive'],
-    boxShadow: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
+    boxShadow: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus', 'dark'],
     boxSizing: ['responsive'],
     brightness: ['responsive'],
     clear: ['responsive'],
     container: ['responsive'],
     contrast: ['responsive'],
     cursor: ['responsive'],
-    display: ['responsive'],
+    display: ['responsive', 'dark'],
     divideColor: ['responsive', 'dark'],
     divideOpacity: ['responsive', 'dark'],
     divideStyle: ['responsive'],
