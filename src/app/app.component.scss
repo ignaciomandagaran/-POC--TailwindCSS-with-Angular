@@ -2,13 +2,13 @@
   @apply h-screen bg-light-gray relative font-sans transition-all dark:bg-dark-blue700;
 
   &:before {
-    @apply block w-full absolute top-0 h-80 bg-cover dark:hidden;
+    @apply opacity-100 w-full absolute top-0 h-80 bg-cover dark:opacity-0;
     content: '';
     background-image: url(./../assets/images/bg-desktop-light.jpg);
   }
 
   &:after {
-    @apply hidden w-full absolute top-0 h-80 bg-cover dark:block;
+    @apply opacity-0 w-full absolute top-0 h-80 bg-cover dark:opacity-100;
     content: '';
     background-image: url(./../assets/images/bg-desktop-dark.jpg);
   }
