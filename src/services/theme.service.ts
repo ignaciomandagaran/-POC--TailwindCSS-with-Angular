@@ -1,6 +1,7 @@
 import { DOCUMENT } from "@angular/common";
 import { Injectable, Renderer2, Inject, RendererFactory2 } from "@angular/core";
-import {BehaviorSubject} from 'rxjs';
+import { MediaMatcher } from '@angular/cdk/layout';
+import { BehaviorSubject } from 'rxjs';
 
 export enum ThemeMode {
   DARK = "dark",
@@ -11,17 +12,23 @@ export enum ThemeMode {
   providedIn: 'root'
 })
 export class ThemeService {
+  public themeQuery: MediaQueryList | undefined;
   public isDarkMode: boolean | undefined;
   public themeValue = new BehaviorSubject(this.localTheme);
   private renderer: Renderer2;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    rendererFactory: RendererFactory2)
+    rendererFactory: RendererFactory2,
+    private media: MediaMatcher)
   {
     this.renderer = rendererFactory.createRenderer(null, null);
 
-    if (this.localTheme === ThemeMode.DARK) {
+    this.themeQuery = this.media.matchMedia('(prefers-color-scheme: dark)');
+
+    if (this.localTheme === ThemeMode.DARK || this.themeQuery.matches) {
+      this.localTheme = ThemeMode.DARK;
+      this.isDarkMode = true;
       this.renderer.addClass(this.document.body, ThemeMode.DARK);
     } else {
       this.renderer.removeClass(this.document.body, ThemeMode.DEFAULT);
