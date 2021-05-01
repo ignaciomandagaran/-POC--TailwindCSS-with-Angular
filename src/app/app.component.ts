@@ -13,9 +13,9 @@ import { UUID } from 'angular2-uuid';
 export class AppComponent implements OnInit {
   isDarkMode = false;
 
-  collection: Item[] | undefined;
+  collection: Item[] = [];
   filter: 'all' | 'active' | 'done' = 'all';
-  uuidValue: string | undefined;
+  uuidValue: string = '';
 
   constructor(public themeService: ThemeService, private firebaseService: FirebaseService) { }
 
