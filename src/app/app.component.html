@@ -25,7 +25,7 @@
       <button class="opacity-0 h-0" (click)="addItem(newItem.value)">Add</button>
 
       <ul class="todo__list">
-        <li class="item__container" *ngFor="let item of items">
+        <li class="item__container" *ngFor="let item of collection">
           <input type="checkbox" [checked]="item.done" (change)="checkValue(item)" id="{{item.description | trim}}" class="mr-5">
           <label for="{{item.description | trim}}"></label>
           <span [ngClass]="{'checked': item.done}">{{item.description}}</span>

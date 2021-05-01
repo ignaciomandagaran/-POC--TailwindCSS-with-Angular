@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ThemeMode, ThemeService } from 'src/services/theme.service';
-import { Item } from './item';
+import { ThemeService } from 'src/services/theme.service';
+import { FirebaseService } from 'src/services/firebase.service';
+import { Item } from '../models/item';
+import { Observable } from 'rxjs';
+import { UUID } from 'angular2-uuid';
 
 @Component({
   selector: 'app-root',
@@ -11,39 +13,49 @@ import { Item } from './item';
 export class AppComponent implements OnInit {
   isDarkMode = false;
 
-  title = 'todo';
+  collection: Item[] | undefined;
   filter: 'all' | 'active' | 'done' = 'all';
+  uuidValue: string | undefined;
 
-  allItems: Item[] = [
-    { description: 'eat', done: true },
-    { description: 'sleep', done: false },
-    { description: 'play', done: false },
-    { description: 'laugh', done: false },
-  ];
-
-  constructor(public themeService: ThemeService) {}
+  constructor(public themeService: ThemeService, private firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
     this.themeService.getThemeValue().subscribe(value => {
       this.isDarkMode = value;
     })
+
+    this.firebaseService.getTodoItems().subscribe(resp => {
+      this.collection = resp.map((e: any) => {
+        return {
+          id: e.payload.doc.data().id,
+          description: e.payload.doc.data().description,
+          done: e.payload.doc.data().done
+        }
+      })
+    },
+    error => {
+      console.error(error);
+    });
   }
 
   ngOnDestroy(): void {
     this.themeService.themeValue.unsubscribe();
   }
 
-  get items() {
-    if (this.filter === 'all') {
-      return this.allItems;
-    }
-    return this.allItems.filter(item => this.filter === 'done' ? item.done : !item.done);
+  generateUUID() {
+    this.uuidValue=UUID.UUID();
+    return this.uuidValue;
   }
 
   addItem(description: string) {
-    this.allItems.unshift({
-      description,
-      done: false
+    this.firebaseService.createTodoItem(
+      {
+        id: this.generateUUID(),
+        description: description,
+        done: false
+      }
+    ).then(resp => {}).catch(error => {
+      console.error(error);
     });
   }
 
@@ -53,5 +65,5 @@ export class AppComponent implements OnInit {
 
   checkValue(item: Item) {
     item.done = !item.done;
- }
+  }
 }
