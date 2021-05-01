@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   constructor(public themeService: ThemeService) {}
 
   ngOnInit(): void {
-    this.themeService.themeValue.subscribe(value => {
+    this.themeService.getThemeValue().subscribe(value => {
       this.isDarkMode = value;
     })
   }

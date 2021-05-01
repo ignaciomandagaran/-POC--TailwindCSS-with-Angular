@@ -29,12 +29,14 @@ export class ThemeService {
       this.isDarkMode = true;
       this.setThemeValue(this.isDarkMode);
       this.renderer.addClass(this.document.body, ThemeMode.DARK);
-    } else if (this.localTheme !== null) {
+    }
+    else if (this.localTheme !== null) {
       if (this.localTheme === ThemeMode.DARK) {
         this.isDarkMode = true;
         this.setThemeValue(this.isDarkMode);
         this.renderer.addClass(this.document.body, ThemeMode.DARK);
-      } else {
+      }
+      else {
         this.isDarkMode = false;
         this.setThemeValue(this.isDarkMode);
         this.renderer.removeClass(this.document.body, ThemeMode.DARK);
@@ -61,7 +63,7 @@ export class ThemeService {
 
   public setThemeValue(newValue: boolean): void {
     this.themeValue.next(newValue);
-}
+  }
 
   set localTheme(value: string) {
     localStorage.setItem('theme', value);
