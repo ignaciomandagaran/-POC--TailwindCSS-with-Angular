@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "todo-list-2bf4e": {
+      "hosting": {
+        "angular-tailwind-poc": [
+          "todo-list-2bf4e"
+        ]
+      }
+    }
+  }
+}
