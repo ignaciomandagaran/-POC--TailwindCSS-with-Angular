@@ -18,7 +18,7 @@ export class FirebaseService {
     return this.firestore.collection("items").add(item);
   }
 
-  deleteTodoItem(id: Item['id']) {
+  deleteTodoItem(id: Item['idFirebase']) {
     return this.firestore.collection("items").doc(id).delete();
   }
 }

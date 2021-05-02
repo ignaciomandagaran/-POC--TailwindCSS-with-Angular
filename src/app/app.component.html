@@ -3,7 +3,7 @@
     <section class="todo__container">
       <header class="flex justify-between items-start mb-8">
         <h1 class="text-5xl text-white tracking-widest">TODO</h1>
-        <button type="button" class="focus:outline-none" (click)="themeService.toggleDarkMode()">
+        <button type="button" (click)="themeService.toggleDarkMode()">
           <svg-icon *ngIf="!isDarkMode" class="theme-icon" src="assets/svg/icon-moon.svg"></svg-icon>
           <svg-icon *ngIf="isDarkMode" class="theme-icon" src="assets/svg/icon-sun.svg"></svg-icon>
         </button>
@@ -29,6 +29,10 @@
           <input type="checkbox" [checked]="item.done" (change)="checkValue(item)" id="{{item.description | trim}}" class="mr-5">
           <label for="{{item.description | trim}}"></label>
           <span [ngClass]="{'checked': item.done}">{{item.description}}</span>
+        </li>
+        <li class="item__container item__container--footer">
+          <span>{{collection.length}} items left</span>
+          <button type="button" (click)="clearCompletedItems()">Clear completed</button>
         </li>
       </ul>
 

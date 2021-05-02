@@ -17,7 +17,9 @@ export class AppComponent implements OnInit {
   filter: 'all' | 'active' | 'done' = 'all';
   uuidValue: string = '';
 
-  constructor(public themeService: ThemeService, private firebaseService: FirebaseService) { }
+  constructor(public themeService: ThemeService,
+              private firebaseService: FirebaseService)
+  {}
 
   ngOnInit(): void {
     this.themeService.getThemeValue().subscribe(value => {
@@ -29,9 +31,11 @@ export class AppComponent implements OnInit {
         return {
           id: e.payload.doc.data().id,
           description: e.payload.doc.data().description,
-          done: e.payload.doc.data().done
+          done: e.payload.doc.data().done,
+          idFirebase: e.payload.doc.id
         }
       })
+
     },
     error => {
       console.error(error);
@@ -52,7 +56,7 @@ export class AppComponent implements OnInit {
       {
         id: this.generateUUID(),
         description: description,
-        done: false
+        done: false,
       }
     ).then(resp => {}).catch(error => {
       console.error(error);
@@ -65,5 +69,13 @@ export class AppComponent implements OnInit {
 
   checkValue(item: Item) {
     item.done = !item.done;
+  }
+
+  clearCompletedItems() {
+    this.collection.forEach(item => {
+      if(item.done) {
+        this.firebaseService.deleteTodoItem(item.idFirebase as string);
+      }
+    });
   }
 }

@@ -64,6 +64,10 @@
       @apply line-through text-light-blue200 dark:text-dark-blue400 transition-all;
     }
   }
+
+  &--footer {
+    @apply flex justify-between text-sm;
+  }
 }
 
 
