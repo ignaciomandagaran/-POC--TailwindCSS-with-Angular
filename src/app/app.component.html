@@ -37,7 +37,7 @@
       </ul>
       <ng-template #emptyState>
         <ngx-skeleton-loader count="1" animation="pulse"
-          [theme]="skeletonTheme">
+          [theme]="isDarkMode ? skeletonTheme.dark : skeletonTheme.default">
         </ngx-skeleton-loader>
       </ng-template>
 
