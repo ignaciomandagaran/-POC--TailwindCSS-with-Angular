@@ -12,10 +12,12 @@ import { UUID } from 'angular2-uuid';
 })
 export class AppComponent implements OnInit {
   isDarkMode = false;
+  dataLoaded = false;
 
   collection: Item[] = [];
   filter: 'all' | 'active' | 'done' = 'all';
   uuidValue: string = '';
+  skeletonTheme = {};
 
   constructor(public themeService: ThemeService,
               private firebaseService: FirebaseService)
@@ -24,6 +26,24 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.themeService.getThemeValue().subscribe(value => {
       this.isDarkMode = value;
+
+      if (this.isDarkMode) {
+        this.skeletonTheme = {
+          'border-radius': '4px',
+          height: '240px',
+          'box-shadow': '0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1)',
+          'background-color': '#25273C',
+          'margin-bottom': '24px'
+        }
+      } else {
+        this.skeletonTheme = {
+          'border-radius': '4px',
+          height: '240px',
+          'box-shadow': '0 20px 25px -5px hsla(236, 33%, 92%, 0.7), 0 10px 10px -5px hsla(236, 33%, 92%, 0.5)',
+          'background-color': '#FFF',
+          'margin-bottom': '24px'
+        }
+      }
     })
 
     this.firebaseService.getTodoItems().subscribe(resp => {
@@ -35,7 +55,7 @@ export class AppComponent implements OnInit {
           idFirebase: e.payload.doc.id
         }
       })
-
+      this.dataLoaded = true;
     },
     error => {
       console.error(error);

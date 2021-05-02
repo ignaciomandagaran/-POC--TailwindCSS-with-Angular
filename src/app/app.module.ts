@@ -8,6 +8,7 @@ import { AppComponent } from './app.component';
 import { TrimPipe } from './pipes/trim.pipe';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { environment } from '../environments/environment';
     HttpClientModule,
     AngularSvgIconModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
+    NgxSkeletonLoaderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
