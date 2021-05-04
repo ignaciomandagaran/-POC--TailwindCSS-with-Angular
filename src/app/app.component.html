@@ -32,7 +32,7 @@
           <label for="{{item.description | trim}}"></label>
           <span [ngClass]="{'checked': item.done}">{{item.description}}</span>
         </li>
-        <li class="item__container item__container--footer">
+        <li *ngIf="collection.length > 0" class="item__container item__container--footer">
           <span>{{collection.length}} items left</span>
           <button type="button" (click)="clearCompletedItems()">Clear completed</button>
         </li>
