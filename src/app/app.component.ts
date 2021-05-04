@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemeService } from 'src/services/theme.service';
 import { FirebaseService } from 'src/services/firebase.service';
+import { AuthService } from 'src/services/auth.service';
 import { Item } from '../models/item';
-import { Observable } from 'rxjs';
 import { UUID } from 'angular2-uuid';
 import { AppConstants } from './utils/constants';
+import { User } from 'src/models/user';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent implements OnInit {
   skeletonTheme = AppConstants.skeletonTheme;
 
   constructor(public themeService: ThemeService,
-              private firebaseService: FirebaseService)
+              private firebaseService: FirebaseService,
+              public authService: AuthService)
   {}
 
   ngOnInit(): void {
