@@ -12,7 +12,7 @@ export class FirebaseService {
   }
 
   getTodoItems(userUid: User['uid']) {
-    return this.firestore.collection("items", ref => ref.where('userUid', '==', userUid)).snapshotChanges();
+    return this.firestore.collection("items", ref => ref.orderBy('date', 'asc').where('userUid', '==', userUid)).snapshotChanges();
   }
 
   createTodoItem(item: Item) {

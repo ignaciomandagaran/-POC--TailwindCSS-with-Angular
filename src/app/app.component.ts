@@ -50,7 +50,8 @@ export class AppComponent implements OnInit {
           userUid: e.payload.doc.data().userUid,
           description: e.payload.doc.data().description,
           done: e.payload.doc.data().done,
-          idFirebase: e.payload.doc.id
+          idFirebase: e.payload.doc.id,
+          date: e.payload.doc.date
         }
       })
       this.dataLoaded = true;
@@ -66,6 +67,7 @@ export class AppComponent implements OnInit {
         userUid: this.authService.userData.uid,
         description: description,
         done: false,
+        date: new Date()
       }
     ).then(resp => {}).catch(error => {
       console.error(error);
