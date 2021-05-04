@@ -1,6 +1,6 @@
 export interface Item {
   idFirebase?: string,
-  id: string,
+  userUid: string,
   description: string;
   done: boolean;
 }

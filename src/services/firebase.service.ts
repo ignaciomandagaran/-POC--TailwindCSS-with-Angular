@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { User } from 'src/models/user';
 import { Item } from '../models/item';
 
 @Injectable({
@@ -10,8 +11,8 @@ export class FirebaseService {
   constructor(private firestore: AngularFirestore) {
   }
 
-  getTodoItems() {
-    return this.firestore.collection("items").snapshotChanges();
+  getTodoItems(userUid: User['uid']) {
+    return this.firestore.collection("items", ref => ref.where('userUid', '==', userUid)).snapshotChanges();
   }
 
   createTodoItem(item: Item) {

@@ -3,7 +3,6 @@ import { ThemeService } from 'src/services/theme.service';
 import { FirebaseService } from 'src/services/firebase.service';
 import { AuthService } from 'src/services/auth.service';
 import { Item } from '../models/item';
-import { UUID } from 'angular2-uuid';
 import { AppConstants } from './utils/constants';
 import { User } from 'src/models/user';
 
@@ -18,7 +17,6 @@ export class AppComponent implements OnInit {
 
   collection: Item[] = [];
   filter: 'all' | 'active' | 'done' = 'all';
-  uuidValue: string = '';
   skeletonTheme = AppConstants.skeletonTheme;
 
   constructor(public themeService: ThemeService,
@@ -26,15 +24,26 @@ export class AppComponent implements OnInit {
               public authService: AuthService)
   {}
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.themeService.getThemeValue().subscribe(value => {
       this.isDarkMode = value;
     })
+  }
 
-    this.firebaseService.getTodoItems().subscribe(resp => {
+  ngOnDestroy(): void {
+    this.themeService.themeValue.unsubscribe();
+  }
+
+  async login() {
+    await this.authService.GoogleAuth();
+    this.getItems(this.authService.userData.uid);
+  }
+
+  getItems(userUid: User['uid']) {
+    this.firebaseService.getTodoItems(userUid).subscribe(resp => {
       this.collection = resp.map((e: any) => {
         return {
-          id: e.payload.doc.data().id,
+          userUid: e.payload.doc.data().userUid,
           description: e.payload.doc.data().description,
           done: e.payload.doc.data().done,
           idFirebase: e.payload.doc.id
@@ -47,19 +56,10 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnDestroy(): void {
-    this.themeService.themeValue.unsubscribe();
-  }
-
-  generateUUID() {
-    this.uuidValue=UUID.UUID();
-    return this.uuidValue;
-  }
-
   addItem(description: string) {
     this.firebaseService.createTodoItem(
       {
-        id: this.generateUUID(),
+        userUid: this.authService.userData.uid,
         description: description,
         done: false,
       }
