@@ -70,6 +70,27 @@
   }
 }
 
+.btn {
+  @apply text-white;
+  border-radius: 4px;
+  background-size: 200% auto;
+  background-image: linear-gradient(164deg, rgba(112,164,250,1) 0%, rgba(180,96,236,1) 100%);
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  transition: 0.5s;
+
+  &:hover {
+    background-position: right center;
+  }
+
+  &--login {
+    @apply px-12 py-4;
+  }
+
+  &--signout {
+    @apply px-6 py-2 m-2;
+  }
+}
+
 @keyframes ngFakeTransition {
   0%   { opacity: 0; }
   100% { opacity: 1; }

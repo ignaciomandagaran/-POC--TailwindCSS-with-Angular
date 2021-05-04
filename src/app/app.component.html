@@ -2,15 +2,15 @@
   <div class="wrapper">
     <section class="todo__container" *ngIf="authService.userData as user; else showLogin">
 
-      <button (click)="authService.SignOut()" class="btn">Sign out</button>
+      <button (click)="authService.SignOut()" class="btn btn--signout absolute top-0 right-0">Sign out</button>
 
       <header class="flex justify-between items-start mb-8">
         <h1 class="text-5xl text-white tracking-widest">TODO</h1>
         <div>
-          <h5>{{user.displayName}}</h5>
-          <button type="button" (click)="themeService.toggleDarkMode()">
-            <svg-icon *ngIf="!isDarkMode" class="theme-icon" src="assets/svg/icon-moon.svg"></svg-icon>
-            <svg-icon *ngIf="isDarkMode" class="theme-icon" src="assets/svg/icon-sun.svg"></svg-icon>
+          <button type="button" class="text-4xl" (click)="themeService.toggleDarkMode()">
+            {{ isDarkMode ? '🌞' : '🌙' }}
+            <!-- <svg-icon *ngIf="!isDarkMode" class="theme-icon" src="assets/svg/icon-moon.svg"></svg-icon>
+            <svg-icon *ngIf="isDarkMode" class="theme-icon" src="assets/svg/icon-sun.svg"></svg-icon> -->
           </button>
         </div>
       </header>
@@ -50,7 +50,9 @@
     </section>
     <ng-template #showLogin>
       <section class="todo__container">
-        <button (click)="login()" class="btn">Log in</button>
+        <div class="flex justify-center">
+          <button (click)="login()" class="btn btn--login">Log in to start!</button>
+        </div>
       </section>
     </ng-template>
   </div>
