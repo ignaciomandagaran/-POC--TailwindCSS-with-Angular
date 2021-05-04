@@ -6,13 +6,9 @@
 
       <header class="flex justify-between items-start mb-8">
         <h1 class="text-5xl text-white tracking-widest">TODO</h1>
-        <div>
-          <button type="button" class="text-4xl" (click)="themeService.toggleDarkMode()">
-            {{ isDarkMode ? '🌝' : '🌚' }}
-            <!-- <svg-icon *ngIf="!isDarkMode" class="theme-icon" src="assets/svg/icon-moon.svg"></svg-icon>
-            <svg-icon *ngIf="isDarkMode" class="theme-icon" src="assets/svg/icon-sun.svg"></svg-icon> -->
-          </button>
-        </div>
+        <button type="button" class="text-4xl" (click)="themeService.toggleDarkMode()">
+          {{ isDarkMode ? '🌝' : '🌚' }}
+        </button>
       </header>
 
       <div class="item__container">

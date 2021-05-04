@@ -28,6 +28,10 @@ export class AppComponent implements OnInit {
     this.themeService.getThemeValue().subscribe(value => {
       this.isDarkMode = value;
     })
+
+    if(!this.authService.userData && localStorage.getItem('userUid')) {
+      this.getItems(localStorage.getItem('userUid'));
+    }
   }
 
   ngOnDestroy(): void {

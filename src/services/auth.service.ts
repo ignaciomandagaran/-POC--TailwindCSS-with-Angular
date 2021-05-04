@@ -29,6 +29,7 @@ export  class  AuthService {
     try {
       const result = await this.fireauth.signInWithPopup(provider);
       await this.SetUserData(result.user);
+      localStorage.setItem('userUid', result.user.uid);
     } catch (error) {
       window.alert(error);
     }
@@ -55,5 +56,6 @@ export  class  AuthService {
   async SignOut() {
     await this.fireauth.signOut();
     this.userData = null;
+    localStorage.setItem('userUid', '');
   }
 }
