@@ -11,7 +11,7 @@
         </button>
       </header>
 
-      <div class="item__container">
+      <div class="item__container mb-6">
         <input type="checkbox" id="checkTodo" class="mr-5">
         <label for="checkTodo" class="pointer-events-none"></label>
 
@@ -24,12 +24,12 @@
       />
       </div>
 
-      <button class="opacity-0 h-0" (click)="addItem(newItem.value)">Add</button>
+      <button class="opacity-0 h-0 invisible" (click)="addItem(newItem.value)">Add</button>
 
       <ul class="todo__list" *ngIf="dataLoaded; else emptyState">
         <li class="item__container" *ngFor="let item of collection">
-          <input type="checkbox" [checked]="item.done" (change)="checkValue(item)" id="{{item.description | trim}}" class="mr-5">
-          <label for="{{item.description | trim}}"></label>
+          <input type="checkbox" [checked]="item.done" (change)="checkValue(item)" id="{{item.idFirebase}}" class="mr-5">
+          <label for="{{item.idFirebase}}"></label>
           <span [ngClass]="{'checked': item.done}">{{item.description}}</span>
         </li>
         <li *ngIf="collection.length > 0" class="item__container item__container--footer">
