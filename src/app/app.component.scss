@@ -26,7 +26,7 @@
 
 .todo {
   &__container {
-    @apply mt-28 w-full max-w-lg z-10;
+    @apply mt-28 w-full max-w-lg z-10 p-4 sm:p-0;
   }
   &__list {
     @apply shadow-light dark:shadow-dark;
