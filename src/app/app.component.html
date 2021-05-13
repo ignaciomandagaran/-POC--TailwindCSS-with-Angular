@@ -51,5 +51,11 @@
         </div>
       </section>
     </ng-template>
+
+    <div *ngIf="!authService.userData" class="animation__container">
+      <app-orbits-animation [darkmode]="isDarkMode" class="animation animation--left"></app-orbits-animation>
+      <app-orbits-animation [darkmode]="isDarkMode" class="animation animation--middle"></app-orbits-animation>
+      <app-orbits-animation [darkmode]="isDarkMode" class="animation animation--right"></app-orbits-animation>
+    </div>
   </div>
 </main>
