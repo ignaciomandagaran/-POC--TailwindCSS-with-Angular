@@ -32,11 +32,12 @@
           <label for="{{item.idFirebase}}"></label>
           <span [ngClass]="{'checked': item.done}">{{item.description}}</span>
         </li>
-        <li *ngIf="collection.length > 0" class="item__container item__container--footer">
-          <span>{{collection.length}} items left</span>
-          <button type="button" (click)="clearCompletedItems()">Clear completed</button>
-        </li>
       </ul>
+      <div *ngIf="collection.length > 0" class="item__container item__container--footer">
+        <span>{{collection.length}} items left</span>
+        <button type="button" (click)="clearCompletedItems()">Clear completed</button>
+      </div>
+
       <ng-template #emptyState>
         <ngx-skeleton-loader count="1" animation="pulse"
           [theme]="isDarkMode ? skeletonTheme.dark : skeletonTheme.default">

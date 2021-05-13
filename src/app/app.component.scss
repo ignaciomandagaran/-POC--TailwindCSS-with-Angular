@@ -30,20 +30,20 @@
 .todo {
   &__container {
     @apply mt-28 w-full max-w-lg z-10 p-4 sm:p-0;
+
   }
   &__list {
     @apply shadow-light dark:shadow-dark;
+    overflow-y: auto;
+    border-radius: 4px 4px 0 0;
+    max-height: 512px;
 
     .item__container {
-      @apply border-b border-solid border-light-blue100 dark:border-dark-blue500;
+      @apply relative border-b border-solid border-light-blue100 dark:border-dark-blue500;
       border-radius: 0;
 
-      &:first-child {
-        border-radius: 4px 4px 0 0;
-      }
       &:last-child {
         border-bottom: none;
-        border-radius: 0 0 4px 4px;
       }
     }
   }
@@ -69,7 +69,9 @@
   }
 
   &--footer {
-    @apply flex justify-between text-sm;
+    @apply relative flex justify-between text-sm;
+    @apply border-t border-solid border-light-blue100 dark:border-dark-blue500;
+    border-radius: 0 0 4px 4px;
   }
 }
 
