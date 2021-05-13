@@ -9,11 +9,13 @@ import { TrimPipe } from './pipes/trim.pipe';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { OrbitsAnimationComponent } from './components/orbits-animation/orbits-animation.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TrimPipe
+    TrimPipe,
+    OrbitsAnimationComponent
   ],
   imports: [
     BrowserModule,
