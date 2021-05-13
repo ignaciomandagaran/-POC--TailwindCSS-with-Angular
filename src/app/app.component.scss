@@ -33,10 +33,13 @@
 
   }
   &__list {
-    @apply shadow-light dark:shadow-dark;
+    @media (min-width: 1680px) {
+      max-height: 512px;
+    }
+    @apply shadow-light dark:shadow-dark xl:max-h-80;
     overflow-y: auto;
     border-radius: 4px 4px 0 0;
-    max-height: 512px;
+    max-height: 341px;
 
     .item__container {
       @apply relative border-b border-solid border-light-blue100 dark:border-dark-blue500;
