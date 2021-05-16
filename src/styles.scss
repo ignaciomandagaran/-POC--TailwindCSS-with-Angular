@@ -9,6 +9,10 @@ html, body {
 }
 
 button {
+  &:disabled {
+    opacity: 0.25;
+    cursor: not-allowed;
+  }
   &:focus {
     outline: none;
   }
