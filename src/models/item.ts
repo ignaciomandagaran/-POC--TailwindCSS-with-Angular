@@ -3,5 +3,5 @@ export interface Item {
   userUid: string,
   description: string;
   done: boolean;
-  date: Date;
+  date?: Date;
 }
