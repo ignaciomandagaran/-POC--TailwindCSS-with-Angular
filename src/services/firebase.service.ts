@@ -1,9 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as TodoActions from 'src/app/store/actions/todo.actions';
-import * as fromTodoReducer from 'src/app/store/reducers/todo.reducer';
-import { createSelector, createFeatureSelector } from '@ngrx/store';
-import { Dictionary } from '@ngrx/entity';
-import { Store, select } from '@ngrx/store';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'src/models/user';
 import { Item } from '../models/item';
