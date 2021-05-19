@@ -1,27 +1,14 @@
-$size: 350px;
-
-@keyframes rotate {
-  // rotate on 3d transform for best perf, it ensures GPU accelerated animation
-  0% {
-    transform: rotateZ(360deg);
-    opacity: 0.1;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: rotateZ(0deg);
-    opacity: 0.1;
-  }
-}
+$size: 300px;
 
 .loader {
+  --color-1: rgba(112,164,250, 0.25);
+  --color-2: rgba(180,96,236, 0.35);
+
   position: relative;
 
   &--dark {
-    .circle {
-      // border-top-color: rgba(146, 130, 243, 1);
-    }
+    --color-1: rgba(112,164,250, 0.2);
+    --color-2: rgba(180,96,236, 0.3);
   }
 }
 
@@ -30,33 +17,82 @@ $size: 350px;
 
   position: absolute;
 
-  border: 12px solid transparent;
-  border-top-color: rgba(146, 130, 243, 1);
   border-radius: 50%;
-
-  animation: rotate linear infinite;
+  background: linear-gradient(164deg, var(--color-1) 0%, var(--color-2) 100%);
 
   &.one {
     height: $size;
     width: $size;
-    left: 50px;
-    top: 50px;
-    animation-duration: 7.65s;
+    left: 0;
+    top: 0;
+    animation: rotate-one linear infinite;
+    animation-duration: 10s;
   }
 
   &.two {
     height: calc(#{$size} * 1.5);
     width: calc(#{$size} * 1.5);
-    top: 38px;
-    left: 38px;
-    animation-duration: 10.95s;
+    top: 25px;
+    left: 25px;
+    animation: rotate-two linear infinite;
+    animation-duration: 12s;
   }
 
   &.three {
     height: calc(#{$size} * 2);
     width: calc(#{$size} * 2);
-    top: 25px;
-    left: 25px;
-    animation-duration: 8.05s;
+    top: 75px;
+    left: 75px;
+    animation: rotate-three linear infinite;
+    animation-duration: 14s;
+  }
+}
+
+@keyframes rotate-one {
+  // rotate on 3d transform for best perf, it ensures GPU accelerated animation
+  0% {
+    transform: rotateZ(360deg);
+    opacity: 0.1;
+
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(30px, 60px)
+  }
+  100% {
+    transform: rotateZ(0deg);
+    opacity: 0.1;
+  }
+}
+
+@keyframes rotate-two {
+  0% {
+    transform: rotateZ(360deg);
+    opacity: 0.1;
+
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(40px, 50px)
+  }
+  100% {
+    transform: rotateZ(0deg);
+    opacity: 0.1;
+  }
+}
+
+@keyframes rotate-three {
+  0% {
+    transform: rotateZ(360deg);
+    opacity: 0.1;
+
+  }
+  50% {
+    opacity: 0.7;
+    transform: translate(60px, 40px)
+  }
+  100% {
+    transform: rotateZ(0deg);
+    opacity: 0.1;
   }
 }
