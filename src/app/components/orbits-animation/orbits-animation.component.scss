@@ -34,7 +34,7 @@ $size: 300px;
     width: calc(#{$size} * 1.5);
     top: 25px;
     left: 25px;
-    animation: rotate-two linear infinite;
+    animation: rotate-two ease-out infinite;
     animation-duration: 12s;
   }
 
@@ -43,8 +43,8 @@ $size: 300px;
     width: calc(#{$size} * 2);
     top: 75px;
     left: 75px;
-    animation: rotate-three linear infinite;
-    animation-duration: 14s;
+    animation: rotate-three ease-in-out infinite;
+    animation-duration: 16s;
   }
 }
 
