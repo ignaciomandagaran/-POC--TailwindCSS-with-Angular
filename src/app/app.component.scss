@@ -2,19 +2,19 @@
   @apply h-screen bg-light-gray relative font-sans overflow-hidden dark:bg-dark-blue700;
   transition: all 650ms linear;
 
-  &:before {
-    @apply opacity-100 w-full absolute top-0 h-80 bg-cover dark:opacity-0;
-    content: '';
-    background-image: url(./../assets/images/bg-desktop-light.jpg);
-    z-index: 5;
-  }
+  // &:before {
+  //   apply opacity-100 w-full absolute top-0 h-80 bg-cover dark:opacity-0;
+  //   content: '';
+  //   background-image: url(./../assets/images/bg-desktop-light.jpg);
+  //   z-index: 5;
+  // }
 
-  &:after {
-    @apply opacity-0 w-full absolute top-0 h-80 bg-cover dark:opacity-100;
-    content: '';
-    background-image: url(./../assets/images/bg-desktop-dark.jpg);
-    z-index: 5;
-  }
+  // &:after {
+  //   apply opacity-0 w-full absolute top-0 h-80 bg-cover dark:opacity-100;
+  //   content: '';
+  //   background-image: url(./../assets/images/bg-desktop-dark.jpg);
+  //   z-index: 5;
+  // }
 }
 
 .wrapper {
