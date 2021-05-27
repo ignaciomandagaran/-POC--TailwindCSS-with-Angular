@@ -17,6 +17,14 @@
   // }
 }
 
+header {
+  .title {
+    background: linear-gradient(164deg, rgba(112,164,250,1) 0%, rgba(180,96,236,1) 100%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
 .wrapper {
   @apply flex justify-center;
 }
